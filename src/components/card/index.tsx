@@ -1,14 +1,18 @@
-import "./App.css";
-import { Container, Title, Description } from "./styles";
+import { Container, Title, Description, TitleContain } from "./styles";
 import { CardProps } from "./Card.type";
 import { FC } from "react";
 
 const Card: FC<CardProps> = (props) => {
-  const { title, description } = props;
+  const { title, description, status } = props;
   return (
     <Container>
-      <Title> {title}</Title>
+      <TitleContain>
+        <Title> {title}</Title>
+      </TitleContain>
       <Description>{description}</Description>
+      {status === "new" ? <>new</> : null}
+      {status === "edit" ? <>edit</> : null}
+      {status === "normal" ? <>normal</> : null}
     </Container>
   );
 };
