@@ -1,10 +1,10 @@
 import { Container, Title, Description, TitleContain } from "./styles";
-import { CardProps } from "./Card.type";
+import { ICard } from "../../model/Card.type";
 import { FC } from "react";
 import { FaSave, FaPlusCircle, FaTrash, FaEdit } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
 
-const Card: FC<CardProps> = (props) => {
+const Card: FC<ICard> = (props) => {
   const { title, description, status } = props;
   return (
     <Container>
