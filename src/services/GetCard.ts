@@ -1,5 +1,5 @@
 import axios from "axios";
-import { config } from "./configAxios";
+import { config } from "./ConfigAxios";
 
 export const GetCard = async () => {
   const configAxios = config("get", "cards");

@@ -1,21 +1,17 @@
 import axios from "axios";
 import { config } from "./ConfigAxios";
+import { IUser } from "../model/User.types";
 
-export const UpdateCard = async (
-  titulo: string,
-  conteudo: string,
-  lista: string
-) => {
+export const Login = async (user: IUser) => {
   const configAxios = config(
-    "put",
-    "cards",
+    "post",
+    "login",
     {
       "Content-Type": "application/json",
     },
     {
-      titulo,
-      conteudo,
-      lista,
+      login: user.userName,
+      senha: user.password,
     }
   );
 

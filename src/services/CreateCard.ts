@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ICard } from "../model/Card.type";
-import { config } from "./configAxios";
+import { config } from "./ConfigAxios";
 
 export const CreateCard = async (
   card: ICard

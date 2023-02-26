@@ -1,5 +1,5 @@
 import axios from "axios";
-import { config } from "./configAxios";
+import { config } from "./ConfigAxios";
 
 export const DeleteCard = async (id: string) => {
   const configAxios = config("delete", `cards/${id}`);
