@@ -1,5 +1,6 @@
 export type ICard = {
+  id?: string;
   title: string;
   description: string;
-  status: "new" | "edit" | "normal";
+  status: "new" | "doing" | "done";
 };

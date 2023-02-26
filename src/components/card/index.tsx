@@ -1,28 +1,28 @@
 import { Container, Title, Description, TitleContain } from "./styles";
-import { ICard } from "../../model/Card.type";
 import { FC } from "react";
+import { CardProps } from "./cardProps.types";
 import { FaSave, FaPlusCircle, FaTrash, FaEdit } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
 
-const Card: FC<ICard> = (props) => {
-  const { title, description, status } = props;
+const Card: FC<CardProps> = (props) => {
+  const { card, type } = props;
   return (
     <Container>
       <TitleContain>
-        <Title> {title}</Title>
+        <Title> {card?.title}</Title>
       </TitleContain>
-      <Description>{description}</Description>
-      {status === "new" ? (
+      <Description>{card?.description}</Description>
+      {type === "new" ? (
         <>
           <FaPlusCircle />
         </>
       ) : null}
-      {status === "edit" ? (
+      {type === "edit" ? (
         <>
           <FaSave /> <CgUnavailable />
         </>
       ) : null}
-      {status === "normal" ? (
+      {type === "normal" ? (
         <>
           <FaTrash />
           <FaEdit />
