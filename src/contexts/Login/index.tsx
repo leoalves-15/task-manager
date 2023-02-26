@@ -7,8 +7,7 @@ export const ContextLogin = createContext<LoginContextType>(
   {} as LoginContextType
 );
 
-const LoginProvider = (props: { children: ReactNode }) => {
-
+export const LoginProvider = (props: { children: ReactNode }) => {
   const { token } = useLogin({ userName: "letscode", password: "lets@123" });
 
   return (
@@ -17,5 +16,3 @@ const LoginProvider = (props: { children: ReactNode }) => {
     </ContextLogin.Provider>
   );
 };
-
-export default LoginProvider;
