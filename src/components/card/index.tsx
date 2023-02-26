@@ -10,7 +10,7 @@ const Card: FC<CardProps> = (props) => {
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "CARD",
-    item: { },
+    item: { id: card.id },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),

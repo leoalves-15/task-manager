@@ -2,17 +2,28 @@ import { Container } from "./styles";
 import Card from "../card";
 import { ColumnProps } from "./columnProps.types";
 import { FC } from "react";
+import { useDrop } from "react-dnd";
+import { ICard } from "../../model/Card.type";
 
 const Column: FC<ColumnProps> = (props) => {
   const { title } = props;
+
+  const [, dropRef] = useDrop({
+    accept: "CARD",
+    hover(item: ICard, monitor) {
+      //item é o card arrastado
+      // console.log(item.id); aqui vai a função de mudar o card de coluna
+    },
+  });
+
   return (
-    <Container>
+    <Container ref={dropRef}>
       <h2>{title}</h2>
       <ul>
         <Card
           type="normal"
           card={{
-            id: "string",
+            id: "string1",
             title: "string",
             description: "string",
             status: "done",
@@ -21,7 +32,7 @@ const Column: FC<ColumnProps> = (props) => {
         <Card
           type="normal"
           card={{
-            id: "string",
+            id: "string2",
             title: "string",
             description: "string",
             status: "done",
@@ -30,7 +41,7 @@ const Column: FC<ColumnProps> = (props) => {
         <Card
           type="normal"
           card={{
-            id: "string",
+            id: "string3",
             title: "string",
             description: "string",
             status: "done",
