@@ -3,11 +3,21 @@ import { FC } from "react";
 import { CardProps } from "./cardProps.types";
 import { FaSave, FaPlusCircle, FaTrash, FaEdit } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
+import { useDrag } from "react-dnd";
 
 const Card: FC<CardProps> = (props) => {
   const { card, type } = props;
+
+  const [{ isDragging }, dragRef] = useDrag({
+    type: "CARD",
+    item: { },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
   return (
-    <Container>
+    <Container isDragging={isDragging} ref={dragRef}>
       <TitleContain>
         <Title> {card?.title}</Title>
       </TitleContain>

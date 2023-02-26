@@ -1,11 +1,26 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { StyleProps } from "./cardProps.types";
 
-export const Container = styled.div`
-  padding: 10px;
-  height: 150px;
-  width: 300px;
+export const Container = styled.div<StyleProps>`
+  position: relative;
+  height: 130px;
+  width: 280px;
   border-radius: 16px;
+  padding: 10px;
   box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  background: blue;
+  ${(props) =>
+    props.isDragging &&
+    css`
+      border: 2px dashed rgba(0, 0, 0, 0.2);
+      background: transparent;
+      box-shadow: none;
+      cursor: grabbing;
+      * {
+        opacity: 0;
+      }
+    `}
 `;
 
 export const TitleContain = styled.div`

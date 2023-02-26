@@ -4,3 +4,7 @@ export type CardProps = {
   card: ICard;
   type: 'new' | 'normal' | 'edit'
 };
+
+export type StyleProps = {
+  isDragging: boolean;
+};
