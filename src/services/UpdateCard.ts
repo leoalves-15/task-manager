@@ -10,9 +10,9 @@ export const UpdateCard = async (card: ICard) => {
       "Content-Type": "application/json",
     },
     {
-      titulo: card.title,
-      conteudo: card.description,
-      lista: card.status,
+      titulo: card.titulo,
+      conteudo: card.conteudo,
+      lista: card.lista,
       id: card.id
     }
   );

@@ -10,7 +10,12 @@ const Card: FC<CardProps> = (props) => {
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "CARD",
-    item: { id: card.id },
+    item: {
+      id: card.id,
+      titulo: card.titulo,
+      conteudo: card.conteudo,
+      lista: card.lista,
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -19,9 +24,9 @@ const Card: FC<CardProps> = (props) => {
   return (
     <Container isDragging={isDragging} ref={dragRef}>
       <TitleContain>
-        <Title> {card?.title}</Title>
+        <Title> {card?.titulo}</Title>
       </TitleContain>
-      <Description>{card?.description}</Description>
+      <Description>{card?.conteudo}</Description>
       {type === "new" ? (
         <>
           <FaPlusCircle />

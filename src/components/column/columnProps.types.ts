@@ -3,5 +3,5 @@ import { ICard } from "../../model/Card.type";
 export type ColumnProps = {
   title: string;
   cards?: ICard[];
-  isNew?: boolean;
+  listId: "new" | "todo" | "doing" | "done";
 };

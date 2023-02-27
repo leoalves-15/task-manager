@@ -1,7 +1,7 @@
 export type ICard = {
   id?: string;
-  title: string;
-  description: string;
+  titulo: string;
+  conteudo: string;
   lista?: string;
   status: "new" | "doing" | "done";
 };

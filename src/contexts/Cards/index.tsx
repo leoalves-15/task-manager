@@ -9,30 +9,30 @@ export const ContextCards = createContext<CardContextType>(
 );
 
 export const CardsProvider = (props: { children: ReactNode }) => {
-  const [cards, setCards] = useState<ICard[]>([]);
+  const [allCards, setAllCards] = useState<ICard[]>([]);
   const [toDo, setToDo] = useState<ICard[]>([]);
   const [doing, setDoing] = useState<ICard[]>([]);
   const [done, setDone] = useState<ICard[]>([]);
 
   useEffect(() => {
     const loadCards = async () => {
-      setCards(await GetCard());
+      setAllCards(await GetCard());
     };
     loadCards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    let todo = cards.filter((card) => card.lista === "todo");
-    let doing = cards.filter((card) => card.lista === "doing");
-    let done = cards.filter((card) => card.lista === "done");
+    let todo = allCards.filter((card) => card.lista === "todo");
+    let doing = allCards.filter((card) => card.lista === "doing");
+    let done = allCards.filter((card) => card.lista === "done");
     setToDo(todo);
     setDoing(doing);
     setDone(done);
-  }, [cards]);
+  }, [allCards]);
 
   return (
-    <ContextCards.Provider value={{ toDo, doing, done }}>
+    <ContextCards.Provider value={{ toDo, doing, done, allCards, setAllCards }}>
       {props.children}
     </ContextCards.Provider>
   );

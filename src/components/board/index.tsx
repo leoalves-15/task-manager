@@ -7,10 +7,10 @@ function Board() {
   const { toDo, doing, done } = useContext(ContextCards);
   return (
     <Container>
-      <Column title="New" isNew />
-      <Column title="To do" cards={toDo} />
-      <Column title="Doing" cards={doing} />
-      <Column title="Done" cards={done} />
+      <Column title="New" listId="new" />
+      <Column title="To do" cards={toDo} listId="todo"/>
+      <Column title="Doing" cards={doing} listId="doing"/>
+      <Column title="Done" cards={done} listId="done"/>
     </Container>
   );
 }

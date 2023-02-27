@@ -10,10 +10,10 @@ export const config = (
     headers: {
       ...header,
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibGV0c2NvZGUiLCJpYXQiOjE2Nzc0NjAyMDksImV4cCI6MTY3NzQ2MzgwOX0.6AWkXMCUUIrFdWT48Rsx5MODp06KBQCcscYyr6cAzhU",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibGV0c2NvZGUiLCJpYXQiOjE2Nzc0Nzc1MDMsImV4cCI6MTY3NzQ4MTEwM30.-IqVEOr5uE7EL0g1F2brGqnFcsnyxrtQLdaSdJde-rA",
     } || {
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibGV0c2NvZGUiLCJpYXQiOjE2Nzc0NjAyMDksImV4cCI6MTY3NzQ2MzgwOX0.6AWkXMCUUIrFdWT48Rsx5MODp06KBQCcscYyr6cAzhU",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibGV0c2NvZGUiLCJpYXQiOjE2Nzc0Nzc1MDMsImV4cCI6MTY3NzQ4MTEwM30.-IqVEOr5uE7EL0g1F2brGqnFcsnyxrtQLdaSdJde-rA",
     },
     data: data || {},
   };

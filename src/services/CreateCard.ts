@@ -12,8 +12,8 @@ export const CreateCard = async (
       "Content-Type": "application/json",
     },
     {
-      titulo: card.title,
-      conteudo: card.description,
+      titulo: card.titulo,
+      conteudo: card.conteudo,
       lista: card.status,
     }
   );

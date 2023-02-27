@@ -1,18 +1,25 @@
 import { Container } from "./styles";
 import Card from "../card";
 import { ColumnProps } from "./columnProps.types";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { useDrop } from "react-dnd";
 import { ICard } from "../../model/Card.type";
+import { UpdateCard } from "../../services";
+import { ContextCards } from "../../contexts";
 
 const Column: FC<ColumnProps> = (props) => {
-  const { title, cards, isNew } = props;
+  const { title, cards, listId } = props;
+  const { allCards, setAllCards } = useContext(ContextCards);
 
   const [, dropRef] = useDrop({
     accept: "CARD",
-    hover(item: ICard, monitor) {
-      //item é o card arrastado
-      // console.log(item.id); aqui vai a função de mudar o card de coluna
+    drop(item: ICard, monitor) {
+      item.lista = listId;
+      let allCardsAux = allCards;
+      allCardsAux = allCardsAux.filter((card) => card.id !== item.id);
+      allCardsAux.push(item);
+      setAllCards(allCardsAux);
+      UpdateCard({ ...item, lista: listId });
     },
   });
 
@@ -20,32 +27,24 @@ const Column: FC<ColumnProps> = (props) => {
     <Container ref={dropRef}>
       <h2>{title}</h2>
       <ul>
-        {isNew ? (
+        {listId === "new" ? (
           <>
             <Card
               type="edit"
               card={{
                 id: "string1",
-                title: "new",
-                description: "string",
+                titulo: "new",
+                conteudo: "string",
                 status: "done",
               }}
             />
           </>
         ) : (
           <>
-            {cards?.map(() => {
+            {cards?.map((item) => {
               return (
                 <>
-                  <Card
-                    type="normal"
-                    card={{
-                      id: "string1",
-                      title: "string",
-                      description: "string",
-                      status: "done",
-                    }}
-                  />
+                  <Card type="normal" card={item} />
                 </>
               );
             })}
