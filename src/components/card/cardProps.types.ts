@@ -9,3 +9,6 @@ export type StyleProps = {
   isDragging: boolean;
   isNew: boolean;
 };
+
+export type FormProps = Record<string, any>;
+

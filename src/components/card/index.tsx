@@ -1,13 +1,17 @@
 import { Container, Title, Description, TitleContain } from "./styles";
-import { FC } from "react";
-import { CardProps } from "./cardProps.types";
+import { FC, useContext } from "react";
+import { CardProps, FormProps } from "./cardProps.types";
 import { FaSave, FaPlusCircle, FaTrash, FaEdit } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
 import { useDrag } from "react-dnd";
 import { CreateCard } from "../../services";
+import { useForm } from "react-hook-form";
+import { ContextCards } from "../../contexts";
 
 const Card: FC<CardProps> = (props) => {
   const { card, type } = props;
+  const { allCards, setAllCards } = useContext(ContextCards);
+  const { register, handleSubmit } = useForm();
 
   const [{ isDragging }, dragRef] = useDrag({
     type: type === "new" ? "" : "CARD",
@@ -22,23 +26,34 @@ const Card: FC<CardProps> = (props) => {
     }),
   });
 
-  const createTask = () => {
-    console.log("teste");
-    CreateCard({ titulo: "teste esse", conteudo: "content", lista: "todo" });
+  const createTask = async (data: FormProps) => {
+    const resp = await CreateCard({
+      titulo: data.titulo,
+      conteudo: data.conteudo,
+      lista: "todo",
+    });
+    if (resp?.id) {
+      setAllCards((prev) => [...prev, resp]);
+    }
   };
 
   return (
     <Container isDragging={isDragging} isNew={type === "new"} ref={dragRef}>
       {type === "new" ? (
         <>
-          <form
-            onSubmit={(e: any) => {
-              e.preventDefault();
-              createTask();
-            }}
-          >
-            <input type="text" />
-            <input type="text" />
+          <form onSubmit={handleSubmit(createTask)}>
+            <input
+              defaultValue=""
+              required
+              placeholder="Título"
+              {...register("titulo")}
+            />
+            <input
+              defaultValue=""
+              required
+              placeholder="Conteúdo"
+              {...register("conteudo")}
+            />
             <button type="submit">
               <FaPlusCircle />
             </button>
