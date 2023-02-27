@@ -2,13 +2,13 @@ import React, { createContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
 import { ICard } from "../../model/Card.type";
 import { GetCard } from "../../services";
-import { CardContextType } from "./CardContext.types";
+import { AllCardContextType } from "./CardContext.types";
 
-export const ContextCards = createContext<CardContextType>(
-  {} as CardContextType
+export const ContextAllCards = createContext<AllCardContextType>(
+  {} as AllCardContextType
 );
 
-export const CardsProvider = (props: { children: ReactNode }) => {
+export const AllCardsProvider = (props: { children: ReactNode }) => {
   const [loadCardsFlag, setLoadCardsFlag] = useState<boolean>(false);
   const [allCards, setAllCards] = useState<ICard[]>([]);
   const [toDo, setToDo] = useState<ICard[]>([]);
@@ -33,8 +33,8 @@ export const CardsProvider = (props: { children: ReactNode }) => {
   }, [allCards]);
 
   return (
-    <ContextCards.Provider value={{ toDo, doing, done, allCards, setAllCards, setLoadCardsFlag }}>
+    <ContextAllCards.Provider value={{ toDo, doing, done, allCards, setLoadCardsFlag }}>
       {props.children}
-    </ContextCards.Provider>
+    </ContextAllCards.Provider>
   );
 };

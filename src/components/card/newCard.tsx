@@ -4,11 +4,11 @@ import { CardProps, FormProps } from "./cardProps.types";
 import { FaPlusCircle } from "react-icons/fa";
 import { CreateCard, UpdateCard } from "../../services";
 import { useForm } from "react-hook-form";
-import { ContextCards } from "../../contexts";
+import { ContextAllCards } from "../../contexts";
 
 const NewCard: FC<CardProps> = (props) => {
   const { type } = props;
-  const { setAllCards } = useContext(ContextCards);
+  const { setLoadCardsFlag } = useContext(ContextAllCards);
   const { register, handleSubmit } = useForm();
 
   const createTask = async (data: FormProps) => {
@@ -18,7 +18,7 @@ const NewCard: FC<CardProps> = (props) => {
       lista: "todo",
     });
     if (resp?.id) {
-      setAllCards((prev) => [...prev, resp]);
+      setLoadCardsFlag((prev) => !prev);
     }
   };
 
@@ -28,12 +28,13 @@ const NewCard: FC<CardProps> = (props) => {
       conteudo: data.conteudo,
       lista: "todo",
     });
-    // if (resp?.id) {
-    //   setAllCards((prev) => [...prev, resp]);
-    // }
+
+    if (resp.length > 0) {
+      setLoadCardsFlag((prev) => !prev);
+    }
   };
 
-  const onSubmit = async (data: FormProps) => {
+  const directionFunction = async (data: FormProps) => {
     if (type === "new") {
       createTask(data);
     } else {
@@ -43,7 +44,7 @@ const NewCard: FC<CardProps> = (props) => {
 
   return (
     <Container isDragging={false} isNew>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(directionFunction)}>
         <input
           defaultValue=""
           required

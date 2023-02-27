@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import Column from "../column";
 import { Container } from "./styles";
-import { ContextCards } from "../../contexts";
+import { ContextAllCards } from "../../contexts";
 
 function Board() {
-  const { toDo, doing, done } = useContext(ContextCards);
+  const { toDo, doing, done } = useContext(ContextAllCards);
   return (
     <Container>
       <Column title="New" listId="new" />

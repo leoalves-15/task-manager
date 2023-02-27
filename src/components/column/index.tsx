@@ -5,11 +5,11 @@ import { FC, useContext } from "react";
 import { useDrop } from "react-dnd";
 import { ICard } from "../../model/Card.type";
 import { UpdateCard } from "../../services";
-import { ContextCards } from "../../contexts";
+import { ContextAllCards } from "../../contexts";
 
 const Column: FC<ColumnProps> = (props) => {
   const { title, cards, listId } = props;
-  const { setLoadCardsFlag } = useContext(ContextCards);
+  const { setLoadCardsFlag } = useContext(ContextAllCards);
 
   const [, dropRef] = useDrop({
     accept: listId !== "new" ? "CARD" : "",
