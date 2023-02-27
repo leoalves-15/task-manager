@@ -5,7 +5,6 @@ import ViewCard from "./viewCard";
 
 const Card: FC<CardProps> = (props) => {
   const { card, type } = props;
-  
   return (
     <>
       {type === "new" ? (
