@@ -1,16 +1,19 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
+import { ContextCards } from "../../contexts";
 import { CardProps } from "./cardProps.types";
 import NewCard from "./newCard";
 import ViewCard from "./viewCard";
 
 const Card: FC<CardProps> = (props) => {
-  const { card, type } = props;
+  const { card, isNew } = props;
+  const { cardSatus } = useContext(ContextCards);
+
   return (
     <>
-      {type === "new" ? (
-        <NewCard type={type} card={card} />
+      {isNew || cardSatus === "edit" ? (
+        <NewCard card={card} />
       ) : (
-        <ViewCard type={type} card={card} />
+        <ViewCard card={card} />
       )}
     </>
   );

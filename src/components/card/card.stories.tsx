@@ -15,18 +15,15 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 export const EditCard = Template.bind({});
 EditCard.args = {
-  card: { titulo: "teste", conteudo: "teste", status: "edit" },
-  type: "edit",
+  card: { titulo: "teste", conteudo: "teste", lista: "toDo"},
 };
 
 export const NormalCard = Template.bind({});
 NormalCard.args = {
-  card: { titulo: "teste", conteudo: "teste", status: "normal" },
-  type: "normal",
+  card: { titulo: "teste", conteudo: "teste", lista: "toDo" },
 };
 
 export const NewCard = Template.bind({});
 NewCard.args = {
-  card: { titulo: "teste", conteudo: "teste", status: "new" },
-  type: "new",
+  card: { titulo: "teste", conteudo: "teste", lista: "toDo"},
 };

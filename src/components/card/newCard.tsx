@@ -1,21 +1,23 @@
 import { Container } from "./styles";
 import { FC, useContext } from "react";
 import { CardProps, FormProps } from "./cardProps.types";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaPlusCircle, FaRegTimesCircle, FaCheck } from "react-icons/fa";
 import { CreateCard, UpdateCard } from "../../services";
 import { useForm } from "react-hook-form";
-import { ContextAllCards } from "../../contexts";
+import { ContextAllCards, ContextCards } from "../../contexts";
 
-const NewCard: FC<CardProps> = (props) => {
-  const { type } = props;
+const NewCard: FC<CardProps> = () => {
   const { setLoadCardsFlag } = useContext(ContextAllCards);
+  const { currentEditCard, cardSatus, currentList, setCardStatus } =
+    useContext(ContextCards);
+
   const { register, handleSubmit } = useForm();
 
   const createTask = async (data: FormProps) => {
     const resp = await CreateCard({
       titulo: data.titulo,
       conteudo: data.conteudo,
-      lista: "todo",
+      lista: "toDo",
     });
     if (resp?.id) {
       setLoadCardsFlag((prev) => !prev);
@@ -23,19 +25,19 @@ const NewCard: FC<CardProps> = (props) => {
   };
 
   const changeTask = async (data: FormProps) => {
-    const resp = await UpdateCard({
+     await UpdateCard({
+      id: currentEditCard?.id,
       titulo: data.titulo,
       conteudo: data.conteudo,
-      lista: "todo",
+      lista: currentList,
     });
+    setCardStatus("view");
 
-    if (resp.length > 0) {
-      setLoadCardsFlag((prev) => !prev);
-    }
+    setLoadCardsFlag((prev) => !prev);
   };
 
   const directionFunction = async (data: FormProps) => {
-    if (type === "new") {
+    if (cardSatus === "new") {
       createTask(data);
     } else {
       changeTask(data);
@@ -46,20 +48,38 @@ const NewCard: FC<CardProps> = (props) => {
     <Container isDragging={false} isNew>
       <form onSubmit={handleSubmit(directionFunction)}>
         <input
-          defaultValue=""
+          defaultValue={currentEditCard?.titulo ? currentEditCard?.titulo : ""}
           required
           placeholder="Título"
           {...register("titulo")}
         />
         <input
-          defaultValue=""
+          defaultValue={
+            currentEditCard?.conteudo ? currentEditCard?.conteudo : ""
+          }
           required
           placeholder="Conteúdo"
           {...register("conteudo")}
         />
-        <button type="submit">
-          <FaPlusCircle />
-        </button>
+        {cardSatus === "edit" ? (
+          <>
+            <button type="submit">
+              <FaCheck />
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setCardStatus("view");
+              }}
+            >
+              <FaRegTimesCircle />
+            </button>
+          </>
+        ) : (
+          <button type="submit">
+            <FaPlusCircle />
+          </button>
+        )}
       </form>
     </Container>
   );

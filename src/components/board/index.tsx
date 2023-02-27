@@ -8,7 +8,7 @@ function Board() {
   return (
     <Container>
       <Column title="New" listId="new" />
-      <Column title="To do" cards={toDo} listId="todo"/>
+      <Column title="To do" cards={toDo} listId="toDo"/>
       <Column title="Doing" cards={doing} listId="doing"/>
       <Column title="Done" cards={done} listId="done"/>
     </Container>

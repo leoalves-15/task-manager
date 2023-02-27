@@ -4,11 +4,12 @@ import { CardProps } from "./cardProps.types";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useDrag } from "react-dnd";
 import { DeleteCard } from "../../services";
-import { ContextAllCards } from "../../contexts";
+import { ContextAllCards, ContextCards } from "../../contexts";
 
 const ViewCard: FC<CardProps> = (props) => {
   const { card } = props;
   const { setLoadCardsFlag } = useContext(ContextAllCards);
+  const { setCardStatus, setCurrentEditCard, setCurrentList } = useContext(ContextCards);
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "CARD",
@@ -45,7 +46,9 @@ const ViewCard: FC<CardProps> = (props) => {
       <button
         type="button"
         onClick={() => {
-          deleteCard();
+          setCardStatus("edit");
+          setCurrentList(card.lista);
+          setCurrentEditCard(card);
         }}
       >
         <FaEdit />

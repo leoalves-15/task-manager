@@ -5,7 +5,7 @@ import { FC, useContext } from "react";
 import { useDrop } from "react-dnd";
 import { ICard } from "../../model/Card.type";
 import { UpdateCard } from "../../services";
-import { ContextAllCards } from "../../contexts";
+import { ContextAllCards, CardsProvider } from "../../contexts";
 
 const Column: FC<ColumnProps> = (props) => {
   const { title, cards, listId } = props;
@@ -24,24 +24,24 @@ const Column: FC<ColumnProps> = (props) => {
       <h2>{title}</h2>
       <ul>
         {listId === "new" ? (
-          <>
+          <CardsProvider>
             <Card
-              type="new"
+              isNew
               card={{
-                id: "string1",
-                titulo: "new",
-                conteudo: "string",
-                status: "new",
+                id: "",
+                titulo: "",
+                conteudo: "",
+                lista: "toDo",
               }}
             />
-          </>
+          </CardsProvider>
         ) : (
           <>
             {cards?.map((item) => {
               return (
-                <>
-                  <Card type="normal" card={item} />
-                </>
+                <CardsProvider>
+                  <Card card={item} />
+                </CardsProvider>
               );
             })}
           </>

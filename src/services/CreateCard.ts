@@ -14,7 +14,7 @@ export const CreateCard = async (
     {
       titulo: card.titulo,
       conteudo: card.conteudo,
-      lista: card.lista,
+      lista: "toDo",
     }
   );
 

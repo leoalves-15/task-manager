@@ -24,7 +24,7 @@ export const AllCardsProvider = (props: { children: ReactNode }) => {
   }, [loadCardsFlag]);
 
   useEffect(() => {
-    let todo = allCards.filter((card) => card.lista === "todo");
+    let todo = allCards.filter((card) => card.lista === "toDo");
     let doing = allCards.filter((card) => card.lista === "doing");
     let done = allCards.filter((card) => card.lista === "done");
     setToDo(todo);
