@@ -10,7 +10,7 @@ import { ContextCards } from "../../contexts";
 
 const Card: FC<CardProps> = (props) => {
   const { card, type } = props;
-  const { allCards, setAllCards } = useContext(ContextCards);
+  const { setAllCards } = useContext(ContextCards);
   const { register, handleSubmit } = useForm();
 
   const [{ isDragging }, dragRef] = useDrag({
