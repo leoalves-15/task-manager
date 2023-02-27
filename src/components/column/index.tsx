@@ -6,7 +6,7 @@ import { useDrop } from "react-dnd";
 import { ICard } from "../../model/Card.type";
 
 const Column: FC<ColumnProps> = (props) => {
-  const { title, cards } = props;
+  const { title, cards, isNew } = props;
 
   const [, dropRef] = useDrop({
     accept: "CARD",
@@ -20,21 +20,37 @@ const Column: FC<ColumnProps> = (props) => {
     <Container ref={dropRef}>
       <h2>{title}</h2>
       <ul>
-        {cards?.map(() => {
-          return (
-            <>
-              <Card
-                type="normal"
-                card={{
-                  id: "string1",
-                  title: "string",
-                  description: "string",
-                  status: "done",
-                }}
-              />
-            </>
-          );
-        })}
+        {isNew ? (
+          <>
+            <Card
+              type="edit"
+              card={{
+                id: "string1",
+                title: "new",
+                description: "string",
+                status: "done",
+              }}
+            />
+          </>
+        ) : (
+          <>
+            {cards?.map(() => {
+              return (
+                <>
+                  <Card
+                    type="normal"
+                    card={{
+                      id: "string1",
+                      title: "string",
+                      description: "string",
+                      status: "done",
+                    }}
+                  />
+                </>
+              );
+            })}
+          </>
+        )}
       </ul>
     </Container>
   );

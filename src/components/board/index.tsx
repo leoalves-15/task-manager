@@ -7,7 +7,7 @@ function Board() {
   const { toDo, doing, done } = useContext(ContextCards);
   return (
     <Container>
-      <Column title="New" />
+      <Column title="New" isNew />
       <Column title="To do" cards={toDo} />
       <Column title="Doing" cards={doing} />
       <Column title="Done" cards={done} />
