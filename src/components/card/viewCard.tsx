@@ -1,12 +1,14 @@
 import { Container, Title, Description, TitleContain } from "./styles";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { CardProps } from "./cardProps.types";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useDrag } from "react-dnd";
 import { DeleteCard } from "../../services";
+import { ContextCards } from "../../contexts";
 
 const ViewCard: FC<CardProps> = (props) => {
   const { card } = props;
+  const { setLoadCardsFlag } = useContext(ContextCards);
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "CARD",
@@ -21,9 +23,9 @@ const ViewCard: FC<CardProps> = (props) => {
     }),
   });
 
-  const deleteCard = async ()  => {
-    const resp = await DeleteCard(card.id);
-    console.log(resp)
+  const deleteCard = async () => {
+    await DeleteCard(card.id);
+    setLoadCardsFlag((prev) => !prev);
   };
 
   return (

@@ -9,6 +9,7 @@ export const ContextCards = createContext<CardContextType>(
 );
 
 export const CardsProvider = (props: { children: ReactNode }) => {
+  const [loadCardsFlag, setLoadCardsFlag] = useState<boolean>(false);
   const [allCards, setAllCards] = useState<ICard[]>([]);
   const [toDo, setToDo] = useState<ICard[]>([]);
   const [doing, setDoing] = useState<ICard[]>([]);
@@ -20,7 +21,7 @@ export const CardsProvider = (props: { children: ReactNode }) => {
     };
     loadCards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loadCardsFlag]);
 
   useEffect(() => {
     let todo = allCards.filter((card) => card.lista === "todo");
@@ -32,7 +33,7 @@ export const CardsProvider = (props: { children: ReactNode }) => {
   }, [allCards]);
 
   return (
-    <ContextCards.Provider value={{ toDo, doing, done, allCards, setAllCards }}>
+    <ContextCards.Provider value={{ toDo, doing, done, allCards, setAllCards, setLoadCardsFlag }}>
       {props.children}
     </ContextCards.Provider>
   );

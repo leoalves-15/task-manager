@@ -9,16 +9,12 @@ import { ContextCards } from "../../contexts";
 
 const Column: FC<ColumnProps> = (props) => {
   const { title, cards, listId } = props;
-  const { allCards, setAllCards } = useContext(ContextCards);
+  const { setLoadCardsFlag } = useContext(ContextCards);
 
   const [, dropRef] = useDrop({
     accept: listId !== "new" ? "CARD" : "",
     drop(item: ICard, monitor) {
-      item.lista = listId;
-      let allCardsAux = allCards;
-      allCardsAux = allCardsAux.filter((card) => card.id !== item.id);
-      allCardsAux.push(item);
-      setAllCards(allCardsAux);
+      setLoadCardsFlag((prev) => !prev);
       UpdateCard({ ...item, lista: listId });
     },
   });
