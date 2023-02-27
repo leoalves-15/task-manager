@@ -9,7 +9,7 @@ const Card: FC<CardProps> = (props) => {
   const { card, type } = props;
 
   const [{ isDragging }, dragRef] = useDrag({
-    type: "CARD",
+    type: type === "new" ? "" : "CARD",
     item: {
       id: card.id,
       titulo: card.titulo,
@@ -22,7 +22,7 @@ const Card: FC<CardProps> = (props) => {
   });
 
   return (
-    <Container isDragging={isDragging} ref={dragRef}>
+    <Container isDragging={isDragging} isNew={type === "new"} ref={dragRef}>
       <TitleContain>
         <Title> {card?.titulo}</Title>
       </TitleContain>

@@ -12,7 +12,7 @@ const Column: FC<ColumnProps> = (props) => {
   const { allCards, setAllCards } = useContext(ContextCards);
 
   const [, dropRef] = useDrop({
-    accept: "CARD",
+    accept: listId !== "new" ? "CARD" : "",
     drop(item: ICard, monitor) {
       item.lista = listId;
       let allCardsAux = allCards;
@@ -30,12 +30,12 @@ const Column: FC<ColumnProps> = (props) => {
         {listId === "new" ? (
           <>
             <Card
-              type="edit"
+              type="new"
               card={{
                 id: "string1",
                 titulo: "new",
                 conteudo: "string",
-                status: "done",
+                status: "new",
               }}
             />
           </>

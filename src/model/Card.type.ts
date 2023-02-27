@@ -3,5 +3,5 @@ export type ICard = {
   titulo: string;
   conteudo: string;
   lista?: string;
-  status: "new" | "doing" | "done";
+  status: "new" | "normal" | "edit";
 };

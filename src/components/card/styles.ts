@@ -8,7 +8,7 @@ export const Container = styled.div<StyleProps>`
   border-radius: 16px;
   padding: 10px;
   box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.1);
-  cursor: grab;
+  cursor: ${(props) => (props.isNew ? "normal" : "grab")};
   background: blue;
   ${(props) =>
     props.isDragging &&
