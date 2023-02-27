@@ -4,6 +4,7 @@ import { CardProps } from "./cardProps.types";
 import { FaSave, FaPlusCircle, FaTrash, FaEdit } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
 import { useDrag } from "react-dnd";
+import { CreateCard } from "../../services";
 
 const Card: FC<CardProps> = (props) => {
   const { card, type } = props;
@@ -21,17 +22,36 @@ const Card: FC<CardProps> = (props) => {
     }),
   });
 
+  const createTask = () => {
+    console.log("teste");
+    CreateCard({ titulo: "teste esse", conteudo: "content", lista: "todo" });
+  };
+
   return (
     <Container isDragging={isDragging} isNew={type === "new"} ref={dragRef}>
-      <TitleContain>
-        <Title> {card?.titulo}</Title>
-      </TitleContain>
-      <Description>{card?.conteudo}</Description>
       {type === "new" ? (
         <>
-          <FaPlusCircle />
+          <form
+            onSubmit={(e: any) => {
+              e.preventDefault();
+              createTask();
+            }}
+          >
+            <input type="text" />
+            <input type="text" />
+            <button type="submit">
+              <FaPlusCircle />
+            </button>
+          </form>
         </>
-      ) : null}
+      ) : (
+        <>
+          <TitleContain>
+            <Title> {card?.titulo}</Title>
+          </TitleContain>
+          <Description>{card?.conteudo}</Description>
+        </>
+      )}
       {type === "edit" ? (
         <>
           <FaSave /> <CgUnavailable />
