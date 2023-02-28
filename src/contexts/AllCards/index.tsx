@@ -21,7 +21,6 @@ export const AllCardsProvider = (props: { children: ReactNode }) => {
   useEffect(() => {
     const loadCards = async () => {
       if (token) {
-        console.log("t", token);
         setAllCards(await GetCard(token));
       }
     };

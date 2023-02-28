@@ -5,7 +5,8 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 50px 4% 0px;
   width: 92%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-color: rgb(24, 28, 35);
   background-image: url(https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/home-background.svg);
   background-repeat: no-repeat;
@@ -15,4 +16,7 @@ export const Container = styled.div`
 
 export const Row = styled.div`
   display: flex;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
