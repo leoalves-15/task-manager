@@ -1,17 +1,18 @@
 import React from "react";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { DndProvider } from "react-dnd/dist/core";
-import Board from "./components/board";
 import { AllCardsProvider, LoginProvider } from "./contexts";
 import "./styles.css";
+import { useMobile } from "./hooks/useMobile";
+import Mobile from "./components/board-with-context-dnd/Mobile";
+import DeskTop from "./components/board-with-context-dnd/DeskTop";
 
 function App() {
+  const { isMobile } = useMobile();
+
   return (
     <LoginProvider>
       <AllCardsProvider>
-        <DndProvider backend={HTML5Backend}>
-          <Board />
-        </DndProvider>
+        {isMobile && <Mobile />}
+        {!isMobile && <DeskTop />}
       </AllCardsProvider>
     </LoginProvider>
   );
