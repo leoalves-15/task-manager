@@ -1,4 +1,10 @@
-import { Container, Title, Description, TitleContain } from "./styles";
+import {
+  Container,
+  Title,
+  Description,
+  TitleContain,
+  ContainButtons,
+} from "./styles";
 import { FC, useContext } from "react";
 import { CardProps } from "./cardProps.types";
 import { FaTrash, FaEdit } from "react-icons/fa";
@@ -9,7 +15,8 @@ import { ContextAllCards, ContextCards } from "../../contexts";
 const ViewCard: FC<CardProps> = (props) => {
   const { card } = props;
   const { setLoadCardsFlag } = useContext(ContextAllCards);
-  const { setCardStatus, setCurrentEditCard, setCurrentList } = useContext(ContextCards);
+  const { setCardStatus, setCurrentEditCard, setCurrentList } =
+    useContext(ContextCards);
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "CARD",
@@ -31,28 +38,30 @@ const ViewCard: FC<CardProps> = (props) => {
 
   return (
     <Container isDragging={isDragging} isNew={false} ref={dragRef}>
+      <ContainButtons>
+        <button
+          type="button"
+          onClick={() => {
+            deleteCard();
+          }}
+        >
+          <FaTrash color="rgb(231, 24, 24)" />
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setCardStatus("edit");
+            setCurrentList(card.lista);
+            setCurrentEditCard(card);
+          }}
+        >
+          <FaEdit color="rgb(166, 247, 80)" />
+        </button>
+      </ContainButtons>
       <TitleContain>
         <Title> {card?.titulo}</Title>
       </TitleContain>
       <Description>{card?.conteudo}</Description>
-      <button
-        type="button"
-        onClick={() => {
-          deleteCard();
-        }}
-      >
-        <FaTrash />
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          setCardStatus("edit");
-          setCurrentList(card.lista);
-          setCurrentEditCard(card);
-        }}
-      >
-        <FaEdit />
-      </button>
     </Container>
   );
 };

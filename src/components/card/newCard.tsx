@@ -1,7 +1,7 @@
-import { Container } from "./styles";
+import { ContainButtons, Container, FormChangeTask } from "./styles";
 import { FC, useContext } from "react";
 import { CardProps, FormProps } from "./cardProps.types";
-import { FaPlusCircle, FaRegTimesCircle, FaCheck } from "react-icons/fa";
+import { FaRegTimesCircle, FaCheck } from "react-icons/fa";
 import { CreateCard, UpdateCard } from "../../services";
 import { useForm } from "react-hook-form";
 import { ContextAllCards, ContextCards } from "../../contexts";
@@ -25,7 +25,7 @@ const NewCard: FC<CardProps> = () => {
   };
 
   const changeTask = async (data: FormProps) => {
-     await UpdateCard({
+    await UpdateCard({
       id: currentEditCard?.id,
       titulo: data.titulo,
       conteudo: data.conteudo,
@@ -46,14 +46,14 @@ const NewCard: FC<CardProps> = () => {
 
   return (
     <Container isDragging={false} isNew>
-      <form onSubmit={handleSubmit(directionFunction)}>
+      <FormChangeTask onSubmit={handleSubmit(directionFunction)}>
         <input
           defaultValue={currentEditCard?.titulo ? currentEditCard?.titulo : ""}
           required
           placeholder="Título"
           {...register("titulo")}
         />
-        <input
+        <textarea
           defaultValue={
             currentEditCard?.conteudo ? currentEditCard?.conteudo : ""
           }
@@ -61,26 +61,24 @@ const NewCard: FC<CardProps> = () => {
           placeholder="Conteúdo"
           {...register("conteudo")}
         />
-        {cardSatus === "edit" ? (
-          <>
-            <button type="submit">
-              <FaCheck />
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setCardStatus("view");
-              }}
-            >
-              <FaRegTimesCircle />
-            </button>
-          </>
-        ) : (
+        <ContainButtons>
           <button type="submit">
-            <FaPlusCircle />
+            <FaCheck color="rgb(166, 247, 80)" />
           </button>
-        )}
-      </form>
+          {cardSatus === "edit" && (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  setCardStatus("view");
+                }}
+              >
+                <FaRegTimesCircle color="rgb(231, 24, 24)" />
+              </button>
+            </>
+          )}
+        </ContainButtons>
+      </FormChangeTask>
     </Container>
   );
 };

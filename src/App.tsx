@@ -3,6 +3,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd/dist/core";
 import Board from "./components/board";
 import { AllCardsProvider } from "./contexts";
+import "./styles.css";
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { Container, ColumnTitle } from "./styles";
 import Card from "../card";
 import { ColumnProps } from "./columnProps.types";
 import { FC, useContext } from "react";
@@ -21,7 +21,7 @@ const Column: FC<ColumnProps> = (props) => {
 
   return (
     <Container ref={dropRef}>
-      <h2>{title}</h2>
+      <ColumnTitle>{title}</ColumnTitle>
       <ul>
         {listId === "new" ? (
           <CardsProvider>
