@@ -37,6 +37,10 @@ export const Title = styled.h2`
   font-family: "Lato", sans-serif;
   font-size: 16px;
   font-weight: 400;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis;
   &:first-letter {
     text-transform: capitalize;
   }
@@ -48,6 +52,13 @@ export const Description = styled.p`
   font-size: 12px;
   color: rgb(166, 247, 80);
   font-weight: 400;
+  display: block;
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ContainButtons = styled.div`
