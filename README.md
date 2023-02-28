@@ -43,6 +43,8 @@ Motivos: Além de ser minha stack principal, react, principalmente com o typing,
 
 3 - usei a paleta de cores da própria ada.
 
+4 - O card de new e de edit estão juntos e o de view separado pois eles tem responsabilidades diferente, respectivamente alterar dados dos cards, seja criando ou atualizando e apenas mostrar.
+
  ### DESAFIO
  ##### requisitos
  
