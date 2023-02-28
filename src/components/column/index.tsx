@@ -39,7 +39,7 @@ const Column: FC<ColumnProps> = (props) => {
           <>
             {cards?.map((item) => {
               return (
-                <CardsProvider>
+                <CardsProvider key={item.id}>
                   <Card card={item} />
                 </CardsProvider>
               );
