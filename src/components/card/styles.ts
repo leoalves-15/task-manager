@@ -39,7 +39,7 @@ export const Title = styled.h2`
   font-weight: 400;
   max-width: 100%;
   white-space: nowrap;
-  overflow: hidden; 
+  overflow: hidden;
   text-overflow: ellipsis;
   &:first-letter {
     text-transform: capitalize;
