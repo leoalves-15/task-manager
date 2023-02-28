@@ -4,33 +4,40 @@ import { CardProps, FormProps } from "./cardProps.types";
 import { FaRegTimesCircle, FaCheck } from "react-icons/fa";
 import { CreateCard, UpdateCard } from "../../services";
 import { useForm } from "react-hook-form";
-import { ContextAllCards, ContextCards } from "../../contexts";
+import { ContextAllCards, ContextCards, ContextLogin } from "../../contexts";
 
 const NewCard: FC<CardProps> = () => {
   const { setLoadCardsFlag } = useContext(ContextAllCards);
   const { currentEditCard, cardSatus, currentList, setCardStatus } =
     useContext(ContextCards);
+  const { token } = useContext(ContextLogin);
 
   const { register, handleSubmit } = useForm();
 
   const createTask = async (data: FormProps) => {
-    const resp = await CreateCard({
-      titulo: data.titulo,
-      conteudo: data.conteudo,
-      lista: "toDo",
-    });
+    const resp = await CreateCard(
+      {
+        titulo: data.titulo,
+        conteudo: data.conteudo,
+        lista: "toDo",
+      },
+      token
+    );
     if (resp?.id) {
       setLoadCardsFlag((prev) => !prev);
     }
   };
 
   const changeTask = async (data: FormProps) => {
-    await UpdateCard({
-      id: currentEditCard?.id,
-      titulo: data.titulo,
-      conteudo: data.conteudo,
-      lista: currentList,
-    });
+    await UpdateCard(
+      {
+        id: currentEditCard?.id,
+        titulo: data.titulo,
+        conteudo: data.conteudo,
+        lista: currentList,
+      },
+      token
+    );
     setCardStatus("view");
 
     setLoadCardsFlag((prev) => !prev);

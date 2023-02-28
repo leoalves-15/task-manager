@@ -1,8 +1,8 @@
 import axios from "axios";
 import { config } from "./ConfigAxios";
 
-export const GetCard = async () => {
-  const configAxios = config("get", "cards");
+export const GetCard = async (token: string) => {
+  const configAxios = config("get", "cards", token);
 
   try {
     const response = await axios(configAxios);

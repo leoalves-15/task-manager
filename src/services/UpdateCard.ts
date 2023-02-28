@@ -2,10 +2,11 @@ import axios from "axios";
 import { ICard } from "../model/Card.type";
 import { config } from "./ConfigAxios";
 
-export const UpdateCard = async (card: ICard) => {
+export const UpdateCard = async (card: ICard, token: string) => {
   const configAxios = config(
     "put",
     `cards/${card.id}`,
+    token,
     {
       "Content-Type": "application/json",
     },
@@ -13,7 +14,7 @@ export const UpdateCard = async (card: ICard) => {
       titulo: card.titulo,
       conteudo: card.conteudo,
       lista: card.lista,
-      id: card.id
+      id: card.id,
     }
   );
 

@@ -6,6 +6,7 @@ export const Login = async (user: IUser) => {
   const configAxios = config(
     "post",
     "login",
+    '',
     {
       "Content-Type": "application/json",
     },

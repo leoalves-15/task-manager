@@ -5,17 +5,18 @@ import { FC, useContext } from "react";
 import { useDrop } from "react-dnd";
 import { ICard } from "../../model/Card.type";
 import { UpdateCard } from "../../services";
-import { ContextAllCards, CardsProvider } from "../../contexts";
+import { ContextAllCards, CardsProvider, ContextLogin } from "../../contexts";
 
 const Column: FC<ColumnProps> = (props) => {
   const { title, cards, listId } = props;
   const { setLoadCardsFlag } = useContext(ContextAllCards);
+  const { token } = useContext(ContextLogin);
 
   const [, dropRef] = useDrop({
     accept: listId !== "new" ? "CARD" : "",
     drop(item: ICard, monitor) {
       setLoadCardsFlag((prev) => !prev);
-      UpdateCard({ ...item, lista: listId });
+      UpdateCard({ ...item, lista: listId }, token);
     },
   });
 

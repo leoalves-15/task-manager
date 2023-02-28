@@ -1,3 +1,3 @@
 export type LoginContextType = {
-  token?: string;
+  token: string;
 };
